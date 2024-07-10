@@ -4,4 +4,9 @@ locals {
   lb_subnet_tags  = merge(local.tags, { Name = "${var.env}-lb-subnet" })
   eks_subnet_tags = merge(local.tags, { Name = "${var.env}-eks-subnet" })
   db_subnet_tags  = merge(local.tags, { Name = "${var.env}-db-subnet" })
+  lb_rt_tags      = merge(local.tags, { Name = "${var.env}-lb-rt" })
+  eks_rt_tags     = merge(local.tags, { Name = "${var.env}-eks-rt" })
+  db_rt_tags      = merge(local.tags, { Name = "${var.env}-db-rt" })
+  ngw_tags       = merge(local.tags, { Name = "${var.env}-ngw" })
+  igw_tags        = merge(local.tags, { Name = "${var.env}-igw" })
 }
