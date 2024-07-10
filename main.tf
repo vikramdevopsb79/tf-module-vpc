@@ -4,14 +4,35 @@ resource "aws_vpc" "main" {
   tags = local.vpc_tags
 }
 
-# resource "aws_subnet" "main" {
-#   vpc_id     = aws_vpc.main.id
-#   cidr_block = var.subnet_cidr_block
-#
-#   tags = {
-#     Name = "${env-vpc}"
-#   }
-# }
+resource "aws_subnet" "lb" {
+  count = length(var.lb_subnet_cidr)
+  vpc_id     = aws_vpc.main.id
+  cidr_block = var.lb_subnet_cidr[count.index]
+ availability_zone = var.azs[count.index]
+  tags = {
+    Name = local.lb_subnet_tags
+  }
+}
+resource "aws_subnet" "eks" {
+  count = length(var.eks_subnet_cidr)
+  vpc_id     = aws_vpc.main.id
+  cidr_block = var.eks_subnet_cidr[count.index]
+  availability_zone = var.azs[count.index]
+
+  tags = {
+    Name = local.eks_subnet_tags
+  }
+}
+resource "aws_subnet" "db" {
+count = length(var.db_subnet_cidr)
+  vpc_id     = aws_vpc.main.id
+  cidr_block = var.db_subnet_cidr[count.index]
+  availability_zone = var.azs[count.index]
+
+  tags = {
+    Name = local.db_subnet_tags
+  }
+}
 #
 # # Create a route table
 # resource "aws_route_table" "rt" {
