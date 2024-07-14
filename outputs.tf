@@ -1,9 +1,9 @@
-# variable "lbsubnets" {
-#   default = "10.0.0.0/24"
-# }
-# output "olb_subnets" {
-#   value = var.lbsubnets
-# }
+variable "name" {
+  default = "10.0.0.0/24"
+}
+output "olb_subnets" {
+  value = var.name
+}
 
 output "vpc_id" {
   value = aws_vpc.main.id
