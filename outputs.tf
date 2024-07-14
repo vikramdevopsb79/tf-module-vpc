@@ -1,3 +1,3 @@
-output "lb_subnet" {
-  value = aws_subnet.lb.cidr_block
+output "lb_subnets" {
+  value = aws_subnet.lb.*.id
 }
