@@ -10,3 +10,6 @@ locals {
   ngw_tags       = merge(local.tags, { Name = "${var.env}-ngw" })
   igw_tags        = merge(local.tags, { Name = "${var.env}-igw" })
 }
+
+
+#
