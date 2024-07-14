@@ -24,4 +24,7 @@ output "db_subnet_ids" {
 output "eks_subnet_cidr" {
   value = aws_subnet.eks.*.cidr_block
 }
+output "vpc_cidr" {
+  value = aws_route.default-vpc.destination_cidr_block
+}
 
