@@ -1,3 +1,6 @@
-output "lb_subnets" {
-  value = aws_subnet.lb.*.id
+variable "lbsubnets" {
+  default = ["10.0.0.0/24", "10.0.1.0/24"]
+}
+output "olb_subnets" {
+  value = var.lbsubnets
 }
