@@ -9,9 +9,7 @@ resource "aws_subnet" "lb" {
   vpc_id     = aws_vpc.main.id
   cidr_block = var.lb_subnet_cidr[count.index]
  availability_zone = var.azs[count.index]
-  tags = {
-    Name = local.lb_subnet_tags
-  }
+  tags = local.lb_subnet_tags
 }
 resource "aws_subnet" "eks" {
   count = length(var.eks_subnet_cidr)
@@ -19,9 +17,8 @@ resource "aws_subnet" "eks" {
   cidr_block = var.eks_subnet_cidr[count.index]
   availability_zone = var.azs[count.index]
 
-  tags = {
-    Name = local.eks_subnet_tags
-  }
+  tags = local.eks_subnet_tags
+
 }
 resource "aws_subnet" "db" {
 count = length(var.db_subnet_cidr)
@@ -29,9 +26,8 @@ count = length(var.db_subnet_cidr)
   cidr_block = var.db_subnet_cidr[count.index]
   availability_zone = var.azs[count.index]
 
-  tags = {
-    Name = local.db_subnet_tags
-  }
+  tags = local.db_subnet_tags
+
 }
 resource "aws_vpc_peering_connection" "main" {
   peer_owner_id = data.aws_caller_identity.current.account_id
@@ -126,9 +122,9 @@ resource "aws_route_table_association" "db" {
   subnet_id      = aws_route_table.db.id
   route_table_id = aws_subnet.db.*.id[count.index]
 }
-output "tag_module" {
-  value = local.vpc_tags
-}
+# output "tag_module" {
+#   value = local.vpc_tags
+# }
 
 # For testing instance logging with private ip
 # resource "aws_security_group" "main" {
