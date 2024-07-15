@@ -122,9 +122,9 @@ resource "aws_route_table_association" "db" {
   subnet_id      = aws_route_table.db.id
   route_table_id = aws_subnet.db.*.id[count.index]
 }
-output "tag_module" {
-  value = local.vpc_tags
-}
+# output "tag_module" {
+#   value = local.vpc_tags
+# }
 
 # For testing instance logging with private ip
 # resource "aws_security_group" "main" {
