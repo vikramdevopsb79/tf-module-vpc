@@ -81,9 +81,10 @@ resource "aws_route_table" "lb" {
 # to attach route tables to subnets
 resource "aws_route_table_association" "lb" {
   count          = length(aws_subnet.lb.*.id)
-  subnet_id      = aws_route_table.lb.id
-  route_table_id = aws_subnet.lb.*.id[count.index]
+  route_table_id      = aws_route_table.lb.id
+  subnet_id   = aws_subnet.lb.*.id[count.index]
 }
+
 resource "aws_route_table" "eks" {
   vpc_id = aws_vpc.main.id
   tags   = local.eks_rt_tags
@@ -100,8 +101,8 @@ resource "aws_route_table" "eks" {
 }
 resource "aws_route_table_association" "eks" {
   count          = length(aws_subnet.eks.*.id)
-  subnet_id      = aws_route_table.eks.id
-  route_table_id = aws_subnet.eks.*.id[count.index]
+  route_table_id  = aws_route_table.eks.id
+  subnet_id      = aws_subnet.eks.*.id[count.index]
 }
 resource "aws_route_table" "db" {
   vpc_id = aws_vpc.main.id
@@ -119,8 +120,8 @@ resource "aws_route_table" "db" {
 }
 resource "aws_route_table_association" "db" {
   count          = length(aws_subnet.db.*.id)
-  subnet_id      = aws_route_table.db.id
-  route_table_id = aws_subnet.db.*.id[count.index]
+  route_table_id      = aws_route_table.db.id
+  subnet_id  = aws_subnet.db.*.id[count.index]
 }
 
 
